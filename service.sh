@@ -3,11 +3,19 @@
 # ALWAYS use $MODDIR if you need to know where this script
 # and module is placed.
 # This will make sure your module will still work
-# if Magisk change its mount point in the future
+# if Magisk changes its mount point in the future.
 MODDIR=${0%/*}
 
 # This script will be executed in late_start service mode
+ui_print "Starting late start service for module..."
+
 # Uncomment the following lines to automatically insert each module after they are fed into the system.
-# for module in $MODDIR/system/lib/modules/*.ko; do
-#      insmod "$module"
-# done
+# if [ -d "$MODDIR/system/lib/modules" ]; then
+#   for module in "$MODDIR/system/lib/modules/"*.ko; do
+#     if [ -f "$module" ]; then
+#       insmod "$module" && ui_print "Inserted $module successfully." || ui_print "Failed to insert $module."
+#     done
+#   done
+# else
+#   ui_print "No modules directory found."
+# fi
